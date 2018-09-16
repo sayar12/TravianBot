@@ -1,6 +1,7 @@
-package com.aa.travianbot.scheduler;
+package com.aa.travianbot.info;
 
 import com.aa.travianbot.config.TravianBotConfig;
+import com.aa.travianbot.scheduler.TravianBotSchedulerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,22 +11,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-public class TravianBotSchedulerController {
+public class InfoController {
 
     private final TravianBotSchedulerDao travianBotSchedulerDao;
     private final TravianBotConfig travianBotConfig;
 
     @Autowired
-    public TravianBotSchedulerController(TravianBotSchedulerDao travianBotSchedulerDao, TravianBotConfig travianBotConfig) {
+    public InfoController(TravianBotSchedulerDao travianBotSchedulerDao, TravianBotConfig travianBotConfig) {
         this.travianBotSchedulerDao = travianBotSchedulerDao;
         this.travianBotConfig = travianBotConfig;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "scheduler/count")
+    @RequestMapping(method = RequestMethod.GET, path = "info")
     public Map<String, Object> getSchedulerCount() {
         Map<String, Object> map = new HashMap<>();
-        map.put("COUNT", travianBotSchedulerDao.getCount());
-        map.put("URL", travianBotConfig.getTravianServerUrl());
+        map.put("TRAVIAN_SERVER_URL", travianBotConfig.getTravianServerUrl());
+        map.put("TRAVIAN_USERNAME", travianBotConfig.getTravianUsername());
+        map.put("SCHEDULER_COUNT", travianBotSchedulerDao.getCount());
+        map.put("SCHEDULER_CREATED_DATETIME", travianBotSchedulerDao.getSchedulerCreatedDateTime());
         return map;
     }
 
