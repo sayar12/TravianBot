@@ -16,7 +16,7 @@ public class TravianBotScheduler {
         this.travianBotSchedulerDao = travianBotSchedulerDao;
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 60000)
     public void execute() {
         log.info("TravianBotScheduler - execute()");
         travianBotSchedulerDao.increaseCount();
