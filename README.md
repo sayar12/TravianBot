@@ -23,7 +23,7 @@ The application is written using:
 
 #### Build on Travis
 
- ----> [![Build Status](https://travis-ci.com/antonioalonzi/open-games.svg?branch=master)](https://travis-ci.com/antonioalonzi/open-games)
+ [![Build Status](https://travis-ci.com/antonioalonzi/TravianBot.svg?branch=master)](https://travis-ci.com/antonioalonzi/TravianBot)
 
 #### Build locally
     
@@ -44,9 +44,9 @@ Run from command line:
 
 ## Deployment
 
----> Application is deployed at: https://open-games.herokuapp.com/
+Application is deployed at: https://travian-bot.herokuapp.com/
 
 The deploy happens automatically after each commit on master if the build passed. 
 
----> * Heroku: https://dashboard.heroku.com/apps/open-games
----> * Travis: https://travis-ci.com/antonioalonzi/open-games
+ * Heroku: https://dashboard.heroku.com/apps/travian-bot
+ * Travis CI: https://travis-ci.com/antonioalonzi/TravianBot
