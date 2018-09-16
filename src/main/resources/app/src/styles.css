@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    background-color: #161616;
+    color: #d0d0d0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+p {
+    margin: 0 0 6px 0;
+    padding: 0;
+}
+
+a:link {
+    color:#d0d0d0;
+}
+
+a:visited {
+    color:#c0c0c0;
+}
+
+a:hover {
+    color:#ffffff;
+}
+
+a:active {
+    color:#d0d0d0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 17px;
+}
+
+h4 {
+    font-size: 16px;
+}
+
+h5 {
+    font-size: 16px;
+}
+
+h6 {
+    font-size: 16px;
+}
+
+
+
+.hidden {
+    display: none;
+}

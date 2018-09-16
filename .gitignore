@@ -1,0 +1,6 @@
+.idea
+travian-bot.iml
+/target/
+node/
+node_modules/
+src/main/resources/public/js/
