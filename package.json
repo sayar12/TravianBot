@@ -15,31 +15,29 @@
   "author": "Antonio Alonzi",
   "license": "",
   "dependencies": {
-    "@stomp/stompjs": "^4.0.2",
-    "babel-loader": "^7.1.3",
-    "babel-preset-es2015": "^6.24.1",
-    "npm": "^5.7.1",
-    "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-router-dom": "^4.2.2",
-    "sockjs-client": "^1.1.4"
+    "babel-loader": "7.1.5",
+    "babel-preset-es2015": "6.24.1",
+    "npm": "5.10.0",
+    "prop-types": "15.6.2",
+    "react": "16.5.1",
+    "react-dom": "16.5.1",
+    "react-router-dom": "4.3.1"
   },
   "devDependencies": {
-    "babel-jest": "^22.4.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "^0.28.11",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "eslint": "^4.18.1",
-    "eslint-plugin-react": "^7.7.0",
-    "jest": "^22.4.2",
-    "jest-enzyme": "^4.2.0",
-    "react-test-renderer": "^16.2.0",
-    "style-loader": "^0.20.3",
-    "webpack": "^4.0.0",
-    "webpack-cli": "^2.0.9"
+    "babel-jest": "22.4.4",
+    "babel-preset-env": "1.7.0",
+    "babel-preset-react": "6.24.1",
+    "css-loader": "0.28.11",
+    "enzyme": "3.6.0",
+    "enzyme-adapter-react-16": "1.5.0",
+    "eslint": "4.19.1",
+    "eslint-plugin-react": "7.11.1",
+    "jest": "23.6.0",
+    "jest-enzyme": "4.2.0",
+    "react-test-renderer": "16.5.1",
+    "style-loader": "0.20.3",
+    "webpack": "4.19.0",
+    "webpack-cli": "2.1.5"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/jest-setup.js",
@@ -48,6 +46,7 @@
     ],
     "moduleNameMapper": {
       "\\.css$": "<rootDir>/src/main/resources/__mocks__/styleMock.js"
-    }
+    },
+    "testEnvironment": "jsdom"
   }
 }
