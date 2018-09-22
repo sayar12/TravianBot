@@ -1,6 +1,8 @@
 package com.aa.travianbot.scheduler;
 
 import com.aa.travianbot.browser.TravianBrowser;
+import com.aa.travianbot.model.fields.ResourceField;
+import com.aa.travianbot.model.fields.ResourceFieldType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,7 +25,9 @@ public class TravianBotScheduler {
     public void execute() {
         log.info("TravianBotScheduler - execute()");
         travianBotSchedulerDao.increaseCount();
-        travianBrowser.dorf1();
+        travianBrowser.getDorf1Browser().load();
+
+        travianBrowser.getDorf1Browser().upgradeField(travianBrowser.getDorf1Browser().getMinimumResourceField(ResourceFieldType.LUMBER));
     }
 
 }
