@@ -4,6 +4,7 @@ import com.aa.travianbot.config.TravianBotConfig;
 import com.aa.travianbot.model.TravianModel;
 import com.aa.travianbot.model.fields.ResourceField;
 import com.aa.travianbot.model.fields.ResourceFieldType;
+import com.aa.travianbot.model.progress.BuildingInProgress;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.aa.travianbot.util.Utils.parseInt;
 
@@ -50,6 +52,17 @@ public class Dorf1Browser {
             }
         }
         log.info(travianModel.getResourceFields().toString());
+
+        WebElement boxesContents = driver.findElement(By.className("boxes-contents"));
+        List<BuildingInProgress> buildingsInProgress = boxesContents.findElements(By.tagName("li")).stream()
+                .map(inProgress -> {
+                    BuildingInProgress buildingInProgress = new BuildingInProgress();
+                    buildingInProgress.setText(inProgress.getText());
+                    return buildingInProgress;
+                })
+                .collect(Collectors.toList());
+        travianModel.setBuildingsInProgress(buildingsInProgress);
+        log.info("BuildingsInProgress: " + travianModel.getBuildingsInProgress().toString());
     }
 
     public ResourceField getMinimumResourceField(ResourceFieldType type) {
