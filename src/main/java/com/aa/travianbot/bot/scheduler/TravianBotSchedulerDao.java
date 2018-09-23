@@ -1,4 +1,4 @@
-package com.aa.travianbot.scheduler;
+package com.aa.travianbot.bot.scheduler;
 
 import org.springframework.stereotype.Service;
 

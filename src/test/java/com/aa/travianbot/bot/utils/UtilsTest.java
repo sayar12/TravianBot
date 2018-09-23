@@ -1,4 +1,4 @@
-package com.aa.travianbot.util;
+package com.aa.travianbot.bot.utils;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;

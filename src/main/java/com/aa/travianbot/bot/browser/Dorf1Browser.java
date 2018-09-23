@@ -1,4 +1,4 @@
-package com.aa.travianbot.browser;
+package com.aa.travianbot.bot.browser;
 
 import com.aa.travianbot.config.TravianBotConfig;
 import com.aa.travianbot.model.TravianModel;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.aa.travianbot.util.Utils.parseInt;
+import static com.aa.travianbot.bot.utils.Utils.parseInt;
 
 @Service
 @Slf4j
@@ -35,24 +35,42 @@ public class Dorf1Browser {
     public void load() {
         driver.get(travianBotConfig.getTravianServerUrl() + "dorf1.php");
 
+        loadResources();
+        loadFields();
+        loadHeroInformation();
+    }
+
+    public void upgradeField(ResourceField field) {
+        driver.get(travianBotConfig.getTravianServerUrl() + "build.php?id=" + field.getId());
+        WebElement upgradeButtonsContainer = driver.findElement(By.className("upgradeButtonsContainer"));
+        upgradeButtonsContainer.findElement(By.tagName("button")).click();
+        log.info("Field Upgraded: " + field.toString());
+    }
+
+    private void loadResources() {
         travianModel.getResources().setLumber(parseInt(driver.findElement(By.id("l1")).getText()));
         travianModel.getResources().setClay(parseInt(driver.findElement(By.id("l2")).getText()));
         travianModel.getResources().setIron(parseInt(driver.findElement(By.id("l3")).getText()));
         travianModel.getResources().setCrop(parseInt(driver.findElement(By.id("l4")).getText()));
         log.info(travianModel.getResources().toString());
+    }
 
+    private void loadFields() {
         List<WebElement> areas = driver.findElements(By.tagName("area"));
         for (WebElement area : areas) {
             if (area.getAttribute("href").contains("id=")) {
-                ResourceField resourceField = new ResourceField();
-                resourceField.setId(parseInt(area.getAttribute("href").substring(area.getAttribute("href").indexOf("id=") + 3)));
-                resourceField.setLevel(parseInt(area.getAttribute("alt").split(" Level ")[1]));
-                resourceField.setType(ResourceFieldType.getFieldTypeByFielName(area.getAttribute("alt")));
+                ResourceField resourceField = ResourceField.builder()
+                        .id(parseInt(area.getAttribute("href").substring(area.getAttribute("href").indexOf("id=") + 3)))
+                        .level(parseInt(area.getAttribute("alt").split(" Level ")[1]))
+                        .type(ResourceFieldType.getFieldTypeByFielName(area.getAttribute("alt")))
+                        .build();
                 travianModel.getResourceFields().update(resourceField);
             }
         }
         log.info(travianModel.getResourceFields().toString());
+    }
 
+    private void loadHeroInformation() {
         WebElement boxesContents = driver.findElement(By.className("boxes-contents"));
         List<BuildingInProgress> buildingsInProgress = boxesContents.findElements(By.tagName("li")).stream()
                 .map(inProgress -> {
@@ -63,32 +81,11 @@ public class Dorf1Browser {
                 .collect(Collectors.toList());
         travianModel.setBuildingsInProgress(buildingsInProgress);
         log.info("BuildingsInProgress: " + travianModel.getBuildingsInProgress().toString());
-    }
 
-    public ResourceField getMinimumResourceField(ResourceFieldType type) {
-        ResourceField minimumResourceField = null;
-
-        for (int resourceFieldId : travianModel.getResourceFields().getResourceFields().keySet()) {
-            ResourceField currentResourceField = travianModel.getResourceFields().getResourceFields().get(resourceFieldId);
-            if (currentResourceField.getType().equals(type)) {
-                if (minimumResourceField == null) {
-                    minimumResourceField = currentResourceField;
-                    continue;
-                }
-
-                if (minimumResourceField.getLevel() > currentResourceField.getLevel()) {
-                    minimumResourceField = currentResourceField;
-                }
-            }
-        }
-
-        return minimumResourceField;
-    }
-
-    public void upgradeField(ResourceField field) {
-        driver.get(travianBotConfig.getTravianServerUrl() + "build.php?id=" + field.getId());
-        WebElement upgradeButtonsContainer = driver.findElement(By.className("upgradeButtonsContainer"));
-        upgradeButtonsContainer.findElement(By.tagName("button")).click();
-        log.info("Field Upgraded: " + field.toString());
+        WebElement heroStatusMessage = driver.findElement(By.className("heroStatusMessage"));
+        travianModel.getHero().setHeroStatusMessage(heroStatusMessage.getText());
+        String availableAdventures = driver.findElement(By.className("sidebarBoxHero")).findElement(By.className("speechBubbleContent")).getText();
+        travianModel.getHero().setHeroAvailableAdventures(parseInt(availableAdventures));
+        log.info(travianModel.getHero().toString());
     }
 }

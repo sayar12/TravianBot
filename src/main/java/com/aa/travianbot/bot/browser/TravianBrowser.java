@@ -1,4 +1,4 @@
-package com.aa.travianbot.browser;
+package com.aa.travianbot.bot.browser;
 
 import com.aa.travianbot.config.TravianBotConfig;
 import com.aa.travianbot.model.TravianModel;
@@ -18,13 +18,17 @@ public class TravianBrowser {
     private final TravianBotConfig travianBotConfig;
     private final TravianModel travianModel;
     private final Dorf1Browser dorf1Browser;
+    private final Dorf2Browser dorf2Browser;
+    private final HeroBrowser heroBrowser;
 
     @Autowired
-    public TravianBrowser(WebDriver driver, TravianBotConfig travianBotConfig, TravianModel travianModel, Dorf1Browser dorf1Browser) {
+    public TravianBrowser(WebDriver driver, TravianBotConfig travianBotConfig, TravianModel travianModel, Dorf1Browser dorf1Browser, Dorf2Browser dorf2Browser, HeroBrowser heroBrowser) {
         this.driver = driver;
         this.travianBotConfig = travianBotConfig;
         this.travianModel = travianModel;
         this.dorf1Browser = dorf1Browser;
+        this.dorf2Browser = dorf2Browser;
+        this.heroBrowser = heroBrowser;
         login();
     }
 

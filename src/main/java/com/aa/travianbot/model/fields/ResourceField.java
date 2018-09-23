@@ -1,8 +1,10 @@
 package com.aa.travianbot.model.fields;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class ResourceField {
 
     private int id;

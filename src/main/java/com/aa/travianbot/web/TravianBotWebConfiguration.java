@@ -1,4 +1,4 @@
-package com.aa.travianbot;
+package com.aa.travianbot.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

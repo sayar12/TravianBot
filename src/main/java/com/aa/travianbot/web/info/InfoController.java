@@ -1,7 +1,7 @@
-package com.aa.travianbot.info;
+package com.aa.travianbot.web.info;
 
 import com.aa.travianbot.config.TravianBotConfig;
-import com.aa.travianbot.scheduler.TravianBotSchedulerDao;
+import com.aa.travianbot.bot.scheduler.TravianBotSchedulerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

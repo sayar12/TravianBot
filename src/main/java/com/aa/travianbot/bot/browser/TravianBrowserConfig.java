@@ -1,4 +1,4 @@
-package com.aa.travianbot.browser;
+package com.aa.travianbot.bot.browser;
 
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.context.annotation.Bean;

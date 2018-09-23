@@ -1,4 +1,4 @@
-package com.aa.travianbot;
+package com.aa.travianbot.web;
 
 import com.aa.travianbot.config.TravianBotConfig;
 import org.springframework.beans.factory.annotation.Autowired;

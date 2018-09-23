@@ -1,4 +1,4 @@
-package com.aa.travianbot.util;
+package com.aa.travianbot.bot.utils;
 
 public class Utils {
 
