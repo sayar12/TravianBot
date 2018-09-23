@@ -4,13 +4,14 @@ import com.aa.travianbot.config.TravianBotConfig;
 import com.aa.travianbot.model.BuildingsUtils;
 import com.aa.travianbot.model.TravianModel;
 import com.aa.travianbot.model.buildings.Building;
-import com.aa.travianbot.model.buildings.Buildings;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static com.aa.travianbot.bot.utils.Utils.parseInt;
 
@@ -41,12 +42,31 @@ public class Dorf2Browser {
             }
             Building building = Building.builder()
                     .code(buildingCode)
-                    .name(BuildingsUtils.buildingNameFromCode(buildingCode))
                     .level(buildingLevel)
                     .id(i)
                     .build();
             travianModel.getBuildings().update(building);
         }
         log.info(travianModel.getBuildings().toString());
+    }
+
+    public void buildNew(String buildingName) {
+        List<Building> emptySlot = travianModel.getBuildings().findByName(BuildingsUtils.EMPTY);
+
+        if (emptySlot.isEmpty()) {
+            throw new RuntimeException("Cannot build building because there are not empty slots: " + buildingName);
+        }
+
+        driver.get(travianBotConfig.getTravianServerUrl() + "build.php?id=" + emptySlot.get(0).getId());
+        log.info("<h1> " + driver.findElement(By.tagName("h1")).getText());
+
+        List<WebElement> buildingWrappers = driver.findElements(By.className("buildingWrapper"));
+        for (WebElement buildingWrapper : buildingWrappers) {
+            log.info("<h2> " + buildingWrapper.findElement(By.tagName("h2")).getText());
+            if (buildingWrapper.findElement(By.tagName("h2")).getText().equals(buildingName)) {
+                buildingWrapper.findElement(By.tagName("button")).click();
+            }
+        }
+        log.info("Building created: " + buildingName);
     }
 }

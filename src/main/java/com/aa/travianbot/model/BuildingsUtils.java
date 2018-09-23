@@ -2,6 +2,11 @@ package com.aa.travianbot.model;
 
 public class BuildingsUtils {
     // ids
+    public static final String G0 = "g0";
+    public static final String G1 = "g1";
+    public static final String G2 = "g2";
+    public static final String G3 = "g3";
+    public static final String G4 = "g4";
     public static final String G5 = "g5";
     public static final String G6 = "g6";
     public static final String G7 = "g7";
@@ -38,7 +43,8 @@ public class BuildingsUtils {
     public static final String G41 = "g41";
 
     // names
-    public static final String WOODCUTTER = "WoodCutter";
+    public static final String EMPTY = "Empty";
+    public static final String WOODCUTTER = "Woodcutter";
     public static final String CLAY_PIT = "Clay Pit";
     public static final String IRON_MINE = "Iron Mine";
     public static final String CROPLAND = "Cropland";
@@ -79,6 +85,7 @@ public class BuildingsUtils {
 
     public static String buildingNameFromCode(String code) {
         switch (code) {
+            case G0: return EMPTY;
             case G5: return SAWMILL;
             case G6: return BRICKYARD;
             case G7: return IRON_FOUNDRY;

@@ -1,5 +1,6 @@
 package com.aa.travianbot.model.buildings;
 
+import com.aa.travianbot.model.BuildingsUtils;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +10,9 @@ public class Building {
 
     private int id;
     private String code;
-    private String name;
     private int level;
 
+    public String getName() {
+        return BuildingsUtils.buildingNameFromCode(code);
+    }
 }
