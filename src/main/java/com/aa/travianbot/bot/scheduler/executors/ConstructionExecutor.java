@@ -27,17 +27,26 @@ public class ConstructionExecutor {
 
         if (travianModel.getBuildingsInProgress().isEmpty()) {
 
+            // Upgrade fields as first thing if they are still level 0
+            ResourceField minimumResourceField = travianModel.getResourceFields().getMinimumResourceField(ResourceFieldType.randomResourceType());
+            if (minimumResourceField.getLevel() == 0) {
+                travianBrowser.getDorf1Browser().upgradeField(minimumResourceField);
+                return;
+            }
+
+            // Build Warehouse if not already there
             if (travianModel.getBuildings().findByName(BuildingsUtils.WAREHOUSE).isEmpty()) {
                 travianBrowser.getDorf2Browser().buildNew(BuildingsUtils.WAREHOUSE);
                 return;
             }
 
+            // Build Warehouse if not already there
             if (travianModel.getBuildings().findByName(BuildingsUtils.GRANARY).isEmpty()) {
                 travianBrowser.getDorf2Browser().buildNew(BuildingsUtils.GRANARY);
                 return;
             }
 
-            ResourceField minimumResourceField = travianModel.getResourceFields().getMinimumResourceField(ResourceFieldType.randomResourceType());
+            // Upgrade fields
             travianBrowser.getDorf1Browser().upgradeField(minimumResourceField);
         }
     }

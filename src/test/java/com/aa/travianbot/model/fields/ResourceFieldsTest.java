@@ -42,9 +42,15 @@ public class ResourceFieldsTest {
         resourceFields.update(resourceField4);
 
         // When
-        ResourceField minimumResourceField = resourceFields.getMinimumResourceField(LUMBER);
+        ResourceField minimumLumberResourceField = resourceFields.getMinimumResourceField(LUMBER);
 
         // Then
-        Assertions.assertThat(minimumResourceField).isEqualTo(resourceField2);
+        Assertions.assertThat(minimumLumberResourceField).isEqualTo(resourceField2);
+
+        // When
+        ResourceField minimumResourceField = resourceFields.getMinimumResourceField();
+
+        // Then
+        Assertions.assertThat(minimumResourceField).isEqualTo(resourceField4);
     }
 }

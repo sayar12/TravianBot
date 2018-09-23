@@ -14,23 +14,15 @@ public class ResourceFields {
         resourceFields.put(resourceField.getId(), resourceField);
     }
 
+    public ResourceField getMinimumResourceField() {
+        return getMinimumResourceField(null);
+    }
+
     public ResourceField getMinimumResourceField(ResourceFieldType type) {
-        ResourceField minimumResourceField = null;
-
-        for (int resourceFieldId : resourceFields.keySet()) {
-            ResourceField currentResourceField = resourceFields.get(resourceFieldId);
-            if (currentResourceField.getType().equals(type)) {
-                if (minimumResourceField == null) {
-                    minimumResourceField = currentResourceField;
-                    continue;
-                }
-
-                if (minimumResourceField.getLevel() > currentResourceField.getLevel()) {
-                    minimumResourceField = currentResourceField;
-                }
-            }
-        }
-
-        return minimumResourceField;
+        return resourceFields.entrySet().stream()
+                .map(Map.Entry::getValue)
+                .filter(resourceField -> type == null || resourceField.getType().equals(type))
+                .reduce((left, right) -> left.getLevel() < right.getLevel() ? left : right)
+                .orElseThrow(() -> new RuntimeException("Exception resourceFields is empty"));
     }
 }
