@@ -27,6 +27,7 @@ public class TravianBotScheduler {
         log.info("TravianBotScheduler - run()");
         travianBotSchedulerDao.increaseCount();
         travianBrowser.getDorf1Browser().load();
+        travianBrowser.getDorf2Browser().load();
 
         constructionExecutor.execute();
     }

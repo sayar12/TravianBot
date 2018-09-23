@@ -1,5 +1,6 @@
 package com.aa.travianbot.model;
 
+import com.aa.travianbot.model.buildings.Buildings;
 import com.aa.travianbot.model.fields.ResourceFields;
 import com.aa.travianbot.model.hero.Hero;
 import com.aa.travianbot.model.progress.BuildingInProgress;
@@ -15,6 +16,7 @@ public class TravianModel {
 
     private Resources resources = new Resources();
     private ResourceFields resourceFields = new ResourceFields();
+    private Buildings buildings = new Buildings();
     private List<BuildingInProgress> buildingsInProgress = new ArrayList<>();
     private Hero hero = new Hero();
 

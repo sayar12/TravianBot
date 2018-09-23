@@ -2,17 +2,19 @@ package com.aa.travianbot.model.fields;
 
 import java.util.Random;
 
+import static com.aa.travianbot.model.BuildingsUtils.*;
+
 public enum ResourceFieldType {
     LUMBER, CLAY, IRON, CROP;
 
     public static ResourceFieldType getFieldTypeByFielName(String fieldName) {
-        if (fieldName.contains("Woodcutter")) {
+        if (fieldName.contains(WOODCUTTER)) {
             return LUMBER;
-        } else if (fieldName.contains("Cropland")) {
+        } else if (fieldName.contains(CROPLAND)) {
             return CROP;
-        } else if (fieldName.contains("Clay Pit")) {
+        } else if (fieldName.contains(CLAY_PIT)) {
             return CLAY;
-        } else if (fieldName.contains("Iron Mine")) {
+        } else if (fieldName.contains(IRON_MINE)) {
             return IRON;
         }
 

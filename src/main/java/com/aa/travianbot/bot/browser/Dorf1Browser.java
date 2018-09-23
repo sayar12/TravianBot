@@ -38,6 +38,7 @@ public class Dorf1Browser {
 
         loadResources();
         loadFields();
+        loadBuildingsInProgress();
         loadHeroInformation();
     }
 
@@ -71,7 +72,7 @@ public class Dorf1Browser {
         log.info(travianModel.getResourceFields().toString());
     }
 
-    private void loadHeroInformation() {
+    private void loadBuildingsInProgress() {
         WebElement boxesContents = driver.findElement(By.className("boxes-contents"));
         List<BuildingInProgress> buildingsInProgress = boxesContents.findElements(By.tagName("li")).stream()
                 .map(inProgress -> {
@@ -82,7 +83,9 @@ public class Dorf1Browser {
                 .collect(Collectors.toList());
         travianModel.setBuildingsInProgress(buildingsInProgress);
         log.info("BuildingsInProgress: " + travianModel.getBuildingsInProgress().toString());
+    }
 
+    private void loadHeroInformation() {
         WebElement heroStatusMessage = driver.findElement(By.className("heroStatusMessage"));
         travianModel.getHero().setHeroStatusMessage(heroStatusMessage.getText());
         WebElement sidebarBoxHero = driver.findElement(By.id("sidebarBoxHero"));
