@@ -29,6 +29,7 @@ public class InfoController {
         map.put("TRAVIAN_USERNAME", travianBotConfig.getTravianUsername());
         map.put("SCHEDULER_COUNT", travianBotSchedulerDao.getCount());
         map.put("SCHEDULER_CREATED_DATETIME", travianBotSchedulerDao.getSchedulerCreatedDateTime());
+        map.put("ACTIONS", travianBotSchedulerDao.getActions());
         return map;
     }
 

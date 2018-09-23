@@ -1,6 +1,7 @@
 package com.aa.travianbot.bot.scheduler.executors;
 
 import com.aa.travianbot.bot.browser.TravianBrowser;
+import com.aa.travianbot.bot.scheduler.TravianBotSchedulerDao;
 import com.aa.travianbot.model.BuildingsUtils;
 import com.aa.travianbot.model.TravianModel;
 import com.aa.travianbot.model.fields.ResourceField;
@@ -13,11 +14,13 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ConstructionExecutor {
 
+    private final TravianBotSchedulerDao travianBotSchedulerDao;
     private final TravianBrowser travianBrowser;
     private final TravianModel travianModel;
 
     @Autowired
-    public ConstructionExecutor(TravianBrowser travianBrowser, TravianModel travianModel) {
+    public ConstructionExecutor(TravianBotSchedulerDao travianBotSchedulerDao, TravianBrowser travianBrowser, TravianModel travianModel) {
+        this.travianBotSchedulerDao = travianBotSchedulerDao;
         this.travianBrowser = travianBrowser;
         this.travianModel = travianModel;
     }
@@ -31,12 +34,14 @@ public class ConstructionExecutor {
             ResourceField minimumResourceField = travianModel.getResourceFields().getMinimumResourceField(ResourceFieldType.randomResourceType());
             if (minimumResourceField.getLevel() == 0) {
                 travianBrowser.getDorf1Browser().upgradeField(minimumResourceField);
+                logUpgradeFieldAction(minimumResourceField);
                 return;
             }
 
             // Build Warehouse if not already there
             if (travianModel.getBuildings().findByName(BuildingsUtils.WAREHOUSE).isEmpty()) {
                 travianBrowser.getDorf2Browser().buildNew(BuildingsUtils.WAREHOUSE);
+                logBuiltBuilding(BuildingsUtils.WAREHOUSE);
                 return;
             }
 
@@ -48,7 +53,21 @@ public class ConstructionExecutor {
 
             // Upgrade fields
             travianBrowser.getDorf1Browser().upgradeField(minimumResourceField);
+            logUpgradeFieldAction(minimumResourceField);
         }
     }
+
+    private void logUpgradeFieldAction(ResourceField resourceField) {
+        travianBotSchedulerDao.getActions().add(ExecutedAction.builder().action(
+                "Upgraded " + resourceField.getType() + " to " + (resourceField.getLevel() + 1) + " [id=" + resourceField.getId() + "]").build()
+        );
+    }
+
+    private void logBuiltBuilding(String buildingName) {
+        travianBotSchedulerDao.getActions().add(ExecutedAction.builder().action(
+                "Build " + buildingName + " level 1"
+        ).build());
+    }
+
 
 }
