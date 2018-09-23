@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+
 @Service
 @Slf4j
 @Getter
@@ -29,6 +31,10 @@ public class TravianBrowser {
         this.dorf1Browser = dorf1Browser;
         this.dorf2Browser = dorf2Browser;
         this.heroBrowser = heroBrowser;
+    }
+
+    @PostConstruct
+    public void init() {
         login();
     }
 

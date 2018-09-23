@@ -7,6 +7,7 @@ import com.aa.travianbot.model.fields.ResourceFieldType;
 import com.aa.travianbot.model.progress.BuildingInProgress;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,8 +85,13 @@ public class Dorf1Browser {
 
         WebElement heroStatusMessage = driver.findElement(By.className("heroStatusMessage"));
         travianModel.getHero().setHeroStatusMessage(heroStatusMessage.getText());
-        String availableAdventures = driver.findElement(By.className("sidebarBoxHero")).findElement(By.className("speechBubbleContent")).getText();
-        travianModel.getHero().setHeroAvailableAdventures(parseInt(availableAdventures));
+        WebElement sidebarBoxHero = driver.findElement(By.id("sidebarBoxHero"));
+        try {
+            String availableAdventures = sidebarBoxHero.findElement(By.className("speechBubbleContent")).getText();
+            travianModel.getHero().setHeroAvailableAdventures(parseInt(availableAdventures));
+        } catch (NotFoundException e) {
+            // no adventures
+        }
         log.info(travianModel.getHero().toString());
     }
 }
