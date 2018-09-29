@@ -45,8 +45,11 @@ public class Dorf1Browser {
     public void upgradeField(ResourceField field) {
         driver.get(travianBotConfig.getTravianServerUrl() + "build.php?id=" + field.getId());
         WebElement upgradeButtonsContainer = driver.findElement(By.className("upgradeButtonsContainer"));
-        upgradeButtonsContainer.findElement(By.tagName("button")).click();
-        log.info("Field Upgraded: " + field.toString());
+        WebElement upgradeButton = upgradeButtonsContainer.findElement(By.tagName("button"));
+        if (!upgradeButton.getText().contains("master builder")) {
+            upgradeButton.click();
+            log.info("Field Upgraded: " + field.toString());
+        }
     }
 
     private void loadResources() {

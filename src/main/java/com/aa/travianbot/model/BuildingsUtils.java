@@ -24,6 +24,7 @@ public class BuildingsUtils {
     public static final String G20 = "g20";
     public static final String G21 = "g21";
     public static final String G22 = "g22";
+    public static final String G23 = "g23";
     public static final String G24 = "g24";
     public static final String G26 = "g26";
     public static final String G27 = "g27";
@@ -48,6 +49,8 @@ public class BuildingsUtils {
     public static final String CLAY_PIT = "Clay Pit";
     public static final String IRON_MINE = "Iron Mine";
     public static final String CROPLAND = "Cropland";
+    public static final String ANY_RESOURCE = "Any Resource";
+    public static final String ALL_RESOURCE = "All Resources";
     public static final String SAWMILL = "Sawmill";
     public static final String BRICKYARD = "Brickyard";
     public static final String IRON_FOUNDRY = "Iron Foundry";
@@ -65,6 +68,7 @@ public class BuildingsUtils {
     public static final String STABLE = "Stable";
     public static final String WORKSHOP = "Workshop";
     public static final String ACADEMY = "Academy";
+    public static final String CRANNY = "Cranny";
     public static final String TOWN_HALL = "Town Hall";
     public static final String PALACE = "Palace";
     public static final String TREASURY = "Treasury";
@@ -103,6 +107,7 @@ public class BuildingsUtils {
             case G20: return STABLE;
             case G21: return WORKSHOP;
             case G22: return ACADEMY;
+            case G23: return CRANNY;
             case G24: return TOWN_HALL;
             case G26: return PALACE;
             case G27: return TREASURY;

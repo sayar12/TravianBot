@@ -1,7 +1,7 @@
 package com.aa.travianbot.bot.scheduler;
 
 import com.aa.travianbot.bot.browser.TravianBrowser;
-import com.aa.travianbot.bot.scheduler.executors.ConstructionExecutor;
+import com.aa.travianbot.bot.scheduler.executors.constructor.ConstructionExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
