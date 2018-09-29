@@ -1,6 +1,5 @@
 package com.aa.travianbot.model.buildings;
 
-import com.aa.travianbot.model.BuildingsUtils;
 import lombok.Builder;
 import lombok.Data;
 

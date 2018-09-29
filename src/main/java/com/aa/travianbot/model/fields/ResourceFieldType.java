@@ -2,7 +2,7 @@ package com.aa.travianbot.model.fields;
 
 import java.util.Random;
 
-import static com.aa.travianbot.model.BuildingsUtils.*;
+import static com.aa.travianbot.model.buildings.BuildingsUtils.*;
 
 public enum ResourceFieldType {
     LUMBER, CLAY, IRON, CROP;

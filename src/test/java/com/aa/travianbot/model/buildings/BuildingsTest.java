@@ -1,6 +1,5 @@
 package com.aa.travianbot.model.buildings;
 
-import com.aa.travianbot.model.BuildingsUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 

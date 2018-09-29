@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.aa.travianbot.model.BuildingsUtils.ALL_RESOURCE;
+import static com.aa.travianbot.model.buildings.BuildingsUtils.ALL_RESOURCE;
 
 @Service
 @Slf4j

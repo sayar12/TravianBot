@@ -1,4 +1,4 @@
-package com.aa.travianbot.model;
+package com.aa.travianbot.model.buildings;
 
 public class BuildingsUtils {
     // ids

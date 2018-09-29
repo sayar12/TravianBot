@@ -1,6 +1,6 @@
 package com.aa.travianbot.bot.scheduler.executors.constructor;
 
-import com.aa.travianbot.model.BuildingsUtils;
+import com.aa.travianbot.model.buildings.BuildingsUtils;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 

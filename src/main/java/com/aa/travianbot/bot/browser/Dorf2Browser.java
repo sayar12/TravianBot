@@ -1,7 +1,7 @@
 package com.aa.travianbot.bot.browser;
 
 import com.aa.travianbot.config.TravianBotConfig;
-import com.aa.travianbot.model.BuildingsUtils;
+import com.aa.travianbot.model.buildings.BuildingsUtils;
 import com.aa.travianbot.model.TravianModel;
 import com.aa.travianbot.model.buildings.Building;
 import lombok.extern.slf4j.Slf4j;
