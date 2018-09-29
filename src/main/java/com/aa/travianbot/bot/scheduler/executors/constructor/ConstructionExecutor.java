@@ -3,6 +3,7 @@ package com.aa.travianbot.bot.scheduler.executors.constructor;
 import com.aa.travianbot.bot.browser.TravianBrowser;
 import com.aa.travianbot.bot.scheduler.TravianBotSchedulerDao;
 import com.aa.travianbot.bot.scheduler.executors.ExecutedAction;
+import com.aa.travianbot.bot.scheduler.executors.TravianExecutor;
 import com.aa.travianbot.model.TravianModel;
 import com.aa.travianbot.model.fields.ResourceField;
 import com.aa.travianbot.model.fields.ResourceFieldType;
@@ -16,7 +17,7 @@ import static com.aa.travianbot.model.buildings.BuildingsUtils.ALL_RESOURCE;
 
 @Service
 @Slf4j
-public class ConstructionExecutor {
+public class ConstructionExecutor implements TravianExecutor {
 
     private final TravianBotSchedulerDao travianBotSchedulerDao;
     private final TravianBrowser travianBrowser;
@@ -32,6 +33,7 @@ public class ConstructionExecutor {
         this.constructionExecutorConfiguration = constructionExecutorConfiguration;
     }
 
+    @Override
     public void execute() {
         log.info("ConstructionExecutor - execute()");
 

@@ -22,11 +22,12 @@ public class HeroBrowser {
         this.travianBotConfig = travianBotConfig;
     }
 
-    public void startAdventure() {
+    public boolean startAdventure() {
         driver.get(travianBotConfig.getTravianServerUrl() + "hero.php?t=3");
         driver.findElements(By.linkText("To the adventure")).get(0).click();
         driver.findElement(By.className("button-content")).click();
         driver.findElement(By.className("button-content")).click();
+        return true;
     }
 
 }

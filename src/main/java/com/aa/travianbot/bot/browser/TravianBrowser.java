@@ -22,15 +22,17 @@ public class TravianBrowser {
     private final Dorf1Browser dorf1Browser;
     private final Dorf2Browser dorf2Browser;
     private final HeroBrowser heroBrowser;
+    private final AdvisorBrowser advisorBrowser;
 
     @Autowired
-    public TravianBrowser(WebDriver driver, TravianBotConfig travianBotConfig, TravianModel travianModel, Dorf1Browser dorf1Browser, Dorf2Browser dorf2Browser, HeroBrowser heroBrowser) {
+    public TravianBrowser(WebDriver driver, TravianBotConfig travianBotConfig, TravianModel travianModel, Dorf1Browser dorf1Browser, Dorf2Browser dorf2Browser, HeroBrowser heroBrowser, AdvisorBrowser advisorBrowser) {
         this.driver = driver;
         this.travianBotConfig = travianBotConfig;
         this.travianModel = travianModel;
         this.dorf1Browser = dorf1Browser;
         this.dorf2Browser = dorf2Browser;
         this.heroBrowser = heroBrowser;
+        this.advisorBrowser = advisorBrowser;
     }
 
     @PostConstruct
@@ -43,5 +45,15 @@ public class TravianBrowser {
         driver.findElement(By.name("name")).sendKeys(travianBotConfig.getTravianUsername());
         driver.findElement(By.name("password")).sendKeys(travianBotConfig.getTravianPassword());
         driver.findElement(By.className("button-content")).click();
+        closeDialogIfOpen();
+    }
+
+    private void closeDialogIfOpen() {
+        try {
+            driver.findElement(By.className("dialogCancelButton")).click();
+
+        } catch (Exception e) {
+
+        }
     }
 }
