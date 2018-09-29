@@ -42,14 +42,16 @@ public class Dorf1Browser {
         loadHeroInformation();
     }
 
-    public void upgradeField(ResourceField field) {
+    public boolean upgradeField(ResourceField field) {
         driver.get(travianBotConfig.getTravianServerUrl() + "build.php?id=" + field.getId());
         WebElement upgradeButtonsContainer = driver.findElement(By.className("upgradeButtonsContainer"));
         WebElement upgradeButton = upgradeButtonsContainer.findElement(By.tagName("button"));
         if (!upgradeButton.getText().contains("master builder")) {
             upgradeButton.click();
             log.info("Field Upgraded: " + field.toString());
+            return true;
         }
+        return false;
     }
 
     private void loadResources() {

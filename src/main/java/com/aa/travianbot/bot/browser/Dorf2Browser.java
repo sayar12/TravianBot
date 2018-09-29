@@ -50,7 +50,7 @@ public class Dorf2Browser {
         log.info(travianModel.getBuildings().toString());
     }
 
-    public void buildNew(String buildingName) {
+    public boolean buildNew(String buildingName) {
         List<Building> emptySlot = travianModel.getBuildings().findByName(BuildingsUtils.EMPTY);
 
         if (emptySlot.isEmpty()) {
@@ -64,9 +64,13 @@ public class Dorf2Browser {
         for (WebElement buildingWrapper : buildingWrappers) {
             log.info("<h2> " + buildingWrapper.findElement(By.tagName("h2")).getText());
             if (buildingWrapper.findElement(By.tagName("h2")).getText().equals(buildingName)) {
-                buildingWrapper.findElement(By.tagName("button")).click();
+                WebElement buildButton = buildingWrapper.findElement(By.tagName("button"));
+                if (buildButton.getText().contains("master builder")) {
+                    return false;
+                }
             }
         }
         log.info("Building created: " + buildingName);
+        return true;
     }
 }

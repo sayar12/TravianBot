@@ -42,14 +42,18 @@ public class ConstructionExecutor {
                 if (configEntry.getName().equals(ALL_RESOURCE)) {
                     ResourceField minimumResourceField = travianModel.getResourceFields().getMinimumResourceField(ResourceFieldType.randomResourceType());
                     if (minimumResourceField.getLevel() < configEntry.getLevel()) {
-                        travianBrowser.getDorf1Browser().upgradeField(minimumResourceField);
-                        logBuild(minimumResourceField.getType().name(), minimumResourceField.getLevel() + 1, minimumResourceField.getId());
+                        boolean upgraded = travianBrowser.getDorf1Browser().upgradeField(minimumResourceField);
+                        if (upgraded) {
+                            logBuild(minimumResourceField.getType().name(), minimumResourceField.getLevel() + 1, minimumResourceField.getId());
+                        }
                     }
 
                 } else {
                     if (travianModel.getBuildings().findByName(configEntry.getName()).isEmpty()) {
-                        travianBrowser.getDorf2Browser().buildNew(configEntry.getName());
-                        logBuild(configEntry.getName(), 1);
+                        boolean built = travianBrowser.getDorf2Browser().buildNew(configEntry.getName());
+                        if (built) {
+                            logBuild(configEntry.getName(), 1);
+                        }
 
                     } else if (travianModel.getBuildings().findByName(configEntry.getName()).get(0).getLevel() < configEntry.getLevel()) {
 
