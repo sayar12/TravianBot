@@ -6,10 +6,12 @@ import com.aa.travianbot.bot.scheduler.executors.ExecutedAction;
 import com.aa.travianbot.bot.scheduler.executors.TravianExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Order(4)
 @Service
 @Slf4j
 public class TaskOverviewExecutor implements TravianExecutor {

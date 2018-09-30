@@ -9,12 +9,14 @@ import com.aa.travianbot.model.fields.ResourceField;
 import com.aa.travianbot.model.fields.ResourceFieldType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static com.aa.travianbot.model.buildings.BuildingsUtils.ALL_RESOURCE;
 
+@Order(2)
 @Service
 @Slf4j
 public class ConstructionExecutor implements TravianExecutor {

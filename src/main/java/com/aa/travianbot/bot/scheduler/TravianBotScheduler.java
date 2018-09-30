@@ -1,6 +1,5 @@
 package com.aa.travianbot.bot.scheduler;
 
-import com.aa.travianbot.bot.browser.TravianBrowser;
 import com.aa.travianbot.bot.scheduler.executors.TravianExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +13,18 @@ import java.util.List;
 public class TravianBotScheduler {
 
     private final TravianBotSchedulerDao travianBotSchedulerDao;
-    private final TravianBrowser travianBrowser;
     private final List<TravianExecutor> travianExecutors;
 
     @Autowired
-    public TravianBotScheduler(TravianBotSchedulerDao travianBotSchedulerDao, TravianBrowser travianBrowser, List<TravianExecutor> travianExecutors) {
+    public TravianBotScheduler(TravianBotSchedulerDao travianBotSchedulerDao, List<TravianExecutor> travianExecutors) {
         this.travianBotSchedulerDao = travianBotSchedulerDao;
-        this.travianBrowser = travianBrowser;
         this.travianExecutors = travianExecutors;
     }
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 300_000)
     public void run() {
-        log.info("TravianBotScheduler - run()");
         travianBotSchedulerDao.increaseCount();
-        travianBrowser.getDorf1Browser().load();
-        travianBrowser.getDorf2Browser().load();
+        log.info("TravianBotScheduler - run() - " + travianBotSchedulerDao.getCount());
 
         for (TravianExecutor travianExecutor : travianExecutors) {
             travianExecutor.execute();

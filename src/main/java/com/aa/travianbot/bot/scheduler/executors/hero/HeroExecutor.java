@@ -7,8 +7,10 @@ import com.aa.travianbot.bot.scheduler.executors.TravianExecutor;
 import com.aa.travianbot.model.TravianModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
+@Order(3)
 @Service
 @Slf4j
 public class HeroExecutor implements TravianExecutor {

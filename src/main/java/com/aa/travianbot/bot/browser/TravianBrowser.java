@@ -48,12 +48,11 @@ public class TravianBrowser {
         closeDialogIfOpen();
     }
 
-    private void closeDialogIfOpen() {
+    public void closeDialogIfOpen() {
         try {
             driver.findElement(By.className("dialogCancelButton")).click();
-
         } catch (Exception e) {
-
+            // don't care if not found
         }
     }
 }

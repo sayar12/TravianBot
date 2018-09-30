@@ -1,12 +1,12 @@
 package com.aa.travianbot.bot.browser;
 
-import com.aa.travianbot.config.TravianBotConfig;
-import com.aa.travianbot.model.TravianModel;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,38 +20,27 @@ import java.util.Optional;
 public class AdvisorBrowser {
 
     private final WebDriver driver;
-    private final TravianBotConfig travianBotConfig;
-    private final TravianModel travianModel;
 
     @Autowired
-    public AdvisorBrowser(WebDriver driver, TravianBotConfig travianBotConfig, TravianModel travianModel) {
+    public AdvisorBrowser(WebDriver driver) {
         this.driver = driver;
-        this.travianBotConfig = travianBotConfig;
-        this.travianModel = travianModel;
     }
 
-
     public Optional<String> getReward() {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-
         WebElement sidebarBoxQuestmaster = driver.findElement(By.id("sidebarBoxQuestmaster"));
-
         List<WebElement> quests = sidebarBoxQuestmaster.findElements(By.tagName("li"));
         for (WebElement quest : quests) {
             if (isCompleted(quest)) {
-                String rewardText = quest.getText();
-                log.info(rewardText + " - Rewarding");
-                quest.findElement(By.tagName("a")).click();
-
-                WebElement questButtonGainReward = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("questButtonGainReward")));
-
-                // TODO this does not work due to javascript issues.
-//                questButtonGainReward.click();
-//
-//                log.info(rewardText + " - Reward collected");
-//                return Optional.of(rewardText);
-
-                return Optional.empty();
+                quest.click();
+                new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.className("questButtonGainReward")));
+                String questText = quest.getText() + " - " + driver.findElement(By.className("questRewards")).getText();
+                WebElement questButtonGainReward = driver.findElement(By.className("questButtonGainReward"));
+                new Actions(driver).moveToElement(questButtonGainReward);
+                sleep(500);
+                new Actions(driver).click();
+                sleep(500);
+                log.info("Reward: '" + questText + "' - Collected");
+                return Optional.of(questText);
             }
         }
         return Optional.empty();
@@ -64,6 +53,11 @@ public class AdvisorBrowser {
         } catch (NotFoundException e) {
             return false;
         }
+    }
+
+    @SneakyThrows
+    private void sleep(int millis) {
+        Thread.sleep(millis);
     }
 
 }
