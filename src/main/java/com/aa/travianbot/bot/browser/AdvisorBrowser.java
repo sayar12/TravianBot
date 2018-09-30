@@ -39,6 +39,8 @@ public class AdvisorBrowser {
                 sleep(500);
                 new Actions(driver).click();
                 sleep(500);
+                questButtonGainReward.click();
+                sleep(500);
                 log.info("Reward: '" + questText + "' - Collected");
                 return Optional.of(questText);
             }
